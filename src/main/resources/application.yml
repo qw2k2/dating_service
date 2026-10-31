@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/dating
-    username: postgres
-    password: 1234
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/dating}
+    username: ${DB_USERNAME:dating_user}
+    password: ${DB_PASSWORD:dating_password}
   jpa:
     hibernate:
-      ddl-auto: validate
-    show-sql: true
+      ddl-auto: update
+    show-sql: false
