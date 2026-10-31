@@ -66,7 +66,6 @@ Content-Type: application/json
 - JDK 17 or newer
 - Maven
 - Docker and Docker Compose
-- PostgreSQL 17 (or the provided Compose service)
 
 ### 1. Start PostgreSQL
 
@@ -74,11 +73,18 @@ Content-Type: application/json
 docker compose up -d
 ```
 
-### 2. Check database configuration
+The Compose configuration uses development defaults. You can override them with environment variables:
 
-The database connection is configured in `src/main/resources/application.yml`. Make sure its database name, username, and password match the values in `docker-compose.yml` before starting the application.
+| Variable | Default |
+| --- | --- |
+| `POSTGRES_DB` | `dating` |
+| `POSTGRES_USER` | `dating_user` |
+| `POSTGRES_PASSWORD` | `dating_password` |
+| `POSTGRES_PORT` | `5432` |
 
-### 3. Run the application
+The Spring Boot application reads `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD`. Their defaults match the local Compose database. For a custom setup, set these variables before launching the application.
+
+### 2. Run the application
 
 ```bash
 mvn spring-boot:run
@@ -103,3 +109,5 @@ The current test suite includes an application-context loading test.
 ## Project status
 
 This is an educational project demonstrating a basic Spring Boot REST application with layered structure and PostgreSQL persistence. Authentication, authorization, request validation, and comprehensive integration tests are not currently implemented.
+
+The default database credentials are intended for local development only. Use environment-specific credentials outside a local environment.
